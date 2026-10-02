@@ -1,0 +1,6 @@
+<svg viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foto profilo in arrivo">
+  <rect width="400" height="480" fill="#1c212b"/>
+  <circle cx="200" cy="190" r="76" fill="#f5c518" opacity="0.9"/>
+  <path d="M60 440c0-88 63-146 140-146s140 58 140 146" fill="#f5c518" opacity="0.9"/>
+  <text x="200" y="470" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" fill="#97a1b3">Foto in arrivo</text>
+</svg>

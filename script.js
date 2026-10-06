@@ -110,6 +110,8 @@
     "hobby.card1.desc": "FIPAV referee in my free time: on weekends I bring the same attention to detail, composure under pressure and people/rule management skills that I apply every day at work with clients.",
     "hobby.card2.title": "Writer on Nerdando.com",
     "hobby.card2.desc": "Under the pen name <strong>Zeno2k</strong> I write for <a href=\"https://nerdando.com/author/zeno2k/\" target=\"_blank\" rel=\"noopener noreferrer\">Nerdando.com</a>, an indie outlet covering the nerd world out of pure passion &mdash; video games, comics, film, TV series and board games.",
+    "hobby.card3.title": "Writer on Wattpad",
+    "hobby.card3.desc": "Also as <strong>Zeno2k</strong>, I write fiction too: on Wattpad I publish <a href=\"https://www.wattpad.com/story/414488321-eri-gi-a-casa\" target=\"_blank\" rel=\"noopener noreferrer\">Eri gi&agrave; a casa</a> (&ldquo;You Were Already Home&rdquo;). Syria doesn&rsquo;t believe in anything &mdash; not in human kindness, not in promises, and certainly not in love. Then she steals the wrong stew, in the wrong kitchen, from the wrong man. Eight days. A house with a man&hellip;",
 
     "personali.kicker": "Personal projects",
     "personali.title": "Things I build for fun",

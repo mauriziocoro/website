@@ -550,14 +550,27 @@
 
     if (!("IntersectionObserver" in window)) return;
 
+    var settleTimer = null;
+
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return;
           var id = entry.target.id;
-          if (id === currentSectionId) return;
-          currentSectionId = id;
-          trackPageView(id);
+
+          // Debounce: durante uno scroll (anche smooth, da click sul menu)
+          // si attraversano le sezioni intermedie in rapida successione e
+          // ognuna farebbe scattare l'observer. Aspettiamo che lo scroll si
+          // fermi per almeno 200ms prima di considerare la sezione
+          // "raggiunta" e tracciarla, cosi' parte un solo pageView invece di
+          // uno per ogni sezione attraversata.
+          if (settleTimer) clearTimeout(settleTimer);
+          settleTimer = setTimeout(function () {
+            settleTimer = null;
+            if (id === currentSectionId) return;
+            currentSectionId = id;
+            trackPageView(id);
+          }, 200);
         });
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }

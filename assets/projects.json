@@ -1,5 +1,13 @@
 [
   {
+    "dateIt": "Giu 2026 — Set 2026",
+    "dateEn": "Jun 2026 — Sep 2026",
+    "roleIt": "CJA Launch Advisory — Deutsche Bank",
+    "roleEn": "CJA Launch Advisory — Deutsche Bank",
+    "orgIt": "Best practice per il progetto di migrazione da Adobe Analytics a Customer Journey Analytics",
+    "orgEn": "Best practices for the migration project from Adobe Analytics to Customer Journey Analytics"
+  },
+  {
     "dateIt": "Mar 2026 — Mag 2026",
     "dateEn": "Mar 2026 — May 2026",
     "roleIt": "Adobe Analytics Launch Advisory — Staples Mobile (USA)",
@@ -70,15 +78,5 @@
     "roleEn": "ITA Airways — Analytics & Target on AEP",
     "orgIt": "Implementazione del tracciamento Analytics con tecnologia Adobe Experience Platform",
     "orgEn": "Analytics tracking implementation using Adobe Experience Platform technology"
-  },
-  {
-    "dateIt": "Lug 2021 — Ott 2021",
-    "dateEn": "Jul 2021 — Oct 2021",
-    "roleLink": "https://www.britishairways.com/",
-    "roleLinkText": "British Airways",
-    "roleIt": "— Migrazione a Launch",
-    "roleEn": "— Launch migration",
-    "orgIt": "Implementazione e configurazione di Launch, Analytics e Target",
-    "orgEn": "Implementation and configuration of Launch, Analytics and Target"
   }
 ]

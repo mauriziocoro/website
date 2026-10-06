@@ -1,0 +1,84 @@
+[
+  {
+    "dateIt": "Mar 2026 — Mag 2026",
+    "dateEn": "Mar 2026 — May 2026",
+    "roleIt": "Adobe Analytics Launch Advisory — Staples Mobile (USA)",
+    "roleEn": "Adobe Analytics Launch Advisory — Staples Mobile (USA)",
+    "orgIt": "Best practice per il deployment e la configurazione di Adobe Analytics via mobile SDK",
+    "orgEn": "Best practices for deploying and configuring Adobe Analytics via mobile SDK"
+  },
+  {
+    "dateIt": "Gen 2026 — in corso",
+    "dateEn": "Jan 2026 — ongoing",
+    "roleIt": "CJA Launch Advisory — INPS",
+    "roleEn": "CJA Launch Advisory — INPS",
+    "orgIt": "Best practice per il deployment di Customer Journey Analytics su touchpoint web e mobile",
+    "orgEn": "Best practices for deploying Customer Journey Analytics across web and mobile touchpoints"
+  },
+  {
+    "dateIt": "Ott 2025 — Mar 2026",
+    "dateEn": "Oct 2025 — Mar 2026",
+    "roleIt": "Adobe Analytics Launch Advisory — Ministero dei Trasporti (Arabia Saudita)",
+    "roleEn": "Adobe Analytics Launch Advisory — Ministry of Transport (Saudi Arabia)",
+    "orgIt": "Implementazione del tracciamento con Adobe Analytics",
+    "orgEn": "Tracking implementation with Adobe Analytics"
+  },
+  {
+    "dateIt": "Mar 2025 — in corso",
+    "dateEn": "Mar 2025 — ongoing",
+    "roleIt": "CJA Launch Advisory — Costa Crociere",
+    "roleEn": "CJA Launch Advisory — Costa Crociere",
+    "orgIt": "Best practice per la migrazione da Analytics a Customer Journey Analytics",
+    "orgEn": "Best practices for migrating from Analytics to Customer Journey Analytics"
+  },
+  {
+    "dateIt": "Gen 2025 — Mar 2025",
+    "dateEn": "Jan 2025 — Mar 2025",
+    "roleIt": "British Airways — Platform & Target integration",
+    "roleEn": "British Airways — Platform & Target integration",
+    "orgIt": "Integrazione tra Adobe Experience Platform (AEP) e Adobe Target",
+    "orgEn": "Integration between Adobe Experience Platform (AEP) and Adobe Target"
+  },
+  {
+    "dateIt": "Ott 2023 — Mar 2024",
+    "dateEn": "Oct 2023 — Mar 2024",
+    "roleIt": "Scuderie Ferrari — Target desktop & mobile",
+    "roleEn": "Scuderie Ferrari — Target desktop & mobile",
+    "orgIt": "Implementazione Adobe Target su mobile via AEP/SDK e su desktop, incluso il sito dealer",
+    "orgEn": "Adobe Target implementation on mobile via AEP/SDK and on desktop, including the dealer site"
+  },
+  {
+    "dateIt": "Gen 2023 — Lug 2024",
+    "dateEn": "Jan 2023 — Jul 2024",
+    "roleIt": "INPS — Analytics & Target su AEP",
+    "roleEn": "INPS — Analytics & Target on AEP",
+    "orgIt": "Tracciamento Analytics e personalizzazione Target via Adobe Experience Platform",
+    "orgEn": "Analytics tracking and Target personalization via Adobe Experience Platform"
+  },
+  {
+    "dateIt": "Gen 2023 — Dic 2023",
+    "dateEn": "Jan 2023 — Dec 2023",
+    "roleIt": "Istituto Poligrafico e Zecca dello Stato — Analytics su AEP",
+    "roleEn": "Istituto Poligrafico e Zecca dello Stato — Analytics on AEP",
+    "orgIt": "Implementazione del tracciamento Analytics via Adobe Experience Platform",
+    "orgEn": "Analytics tracking implementation via Adobe Experience Platform"
+  },
+  {
+    "dateIt": "2021 — 2023",
+    "dateEn": "2021 — 2023",
+    "roleIt": "ITA Airways — Analytics & Target su AEP",
+    "roleEn": "ITA Airways — Analytics & Target on AEP",
+    "orgIt": "Implementazione del tracciamento Analytics con tecnologia Adobe Experience Platform",
+    "orgEn": "Analytics tracking implementation using Adobe Experience Platform technology"
+  },
+  {
+    "dateIt": "Lug 2021 — Ott 2021",
+    "dateEn": "Jul 2021 — Oct 2021",
+    "roleLink": "https://www.britishairways.com/",
+    "roleLinkText": "British Airways",
+    "roleIt": "— Migrazione a Launch",
+    "roleEn": "— Launch migration",
+    "orgIt": "Implementazione e configurazione di Launch, Analytics e Target",
+    "orgEn": "Implementation and configuration of Launch, Analytics and Target"
+  }
+]

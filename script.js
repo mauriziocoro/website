@@ -79,72 +79,6 @@
     "progetti.prevAria": "Previous project",
     "progetti.nextAria": "Next project",
 
-    "proj1.date": "Mar 2026 &mdash; May 2026",
-    "proj1.role": "Adobe Analytics Launch Advisory &mdash; Staples Mobile (USA)",
-    "proj1.org": "Best practices for deploying and configuring Adobe Analytics via mobile SDK",
-
-    "proj2.date": "Jan 2026 &mdash; ongoing",
-    "proj2.role": "CJA Launch Advisory &mdash; INPS",
-    "proj2.org": "Best practices for deploying Customer Journey Analytics across web and mobile touchpoints",
-
-    "proj3.date": "Oct 2025 &mdash; Mar 2026",
-    "proj3.role": "Adobe Analytics Launch Advisory &mdash; Ministry of Transport (Saudi Arabia)",
-    "proj3.org": "Tracking implementation with Adobe Analytics",
-
-    "proj4.date": "Mar 2025 &mdash; ongoing",
-    "proj4.role": "CJA Launch Advisory &mdash; Costa Crociere",
-    "proj4.org": "Best practices for migrating from Analytics to Customer Journey Analytics",
-
-    "proj5.date": "Jan 2025 &mdash; Mar 2025",
-    "proj5.role": "British Airways &mdash; Platform &amp; Target integration",
-    "proj5.org": "Integration between Adobe Experience Platform (AEP) and Adobe Target",
-
-    "proj6.date": "Oct 2023 &mdash; Mar 2024",
-    "proj6.role": "Scuderie Ferrari &mdash; Target desktop &amp; mobile",
-    "proj6.org": "Adobe Target implementation on mobile via AEP/SDK and on desktop, including the dealer site",
-
-    "proj7.date": "Jan 2023 &mdash; Jul 2024",
-    "proj7.role": "INPS &mdash; Analytics &amp; Target on AEP",
-    "proj7.org": "Analytics tracking and Target personalization via Adobe Experience Platform",
-
-    "proj8.date": "Jan 2023 &mdash; Dec 2023",
-    "proj8.role": "Istituto Poligrafico e Zecca dello Stato &mdash; Analytics on AEP",
-    "proj8.org": "Analytics tracking implementation via Adobe Experience Platform",
-
-    "proj9.date": "2021 &mdash; 2023",
-    "proj9.role": "ITA Airways &mdash; Analytics &amp; Target on AEP",
-    "proj9.org": "Analytics tracking implementation using Adobe Experience Platform technology",
-
-    "proj10.date": "Jul 2021 &mdash; Oct 2021",
-    "proj10.role": "&mdash; Launch migration",
-    "proj10.org": "Implementation and configuration of Launch, Analytics and Target",
-
-    "proj11.date": "Jan 2020 &mdash; 2023",
-    "proj11.role": "Helvetia &mdash; Adobe Analytics",
-    "proj11.org": "Implementation and configuration across website and mobile app",
-
-    "proj12.date": "Oct 2020 &mdash; Dec 2021",
-    "proj12.role": "Alitalia &mdash; Adobe Campaign Standard",
-    "proj12.org": "Migration from Campaign Classic to Standard, configuration and implementation",
-
-    "proj13.date": "Jul 2018 &mdash; 2020",
-    "proj13.role": "Armani &mdash; AEM / Adobe Campaign integration",
-    "proj13.org": "Backoffice integration between Adobe AEM and Adobe Campaign for managing sends",
-
-    "proj14.date": "Jul 2018 &mdash; 2022",
-    "proj14.org": "Integration with Audience Manager, push notifications and Message Center",
-
-    "proj15.date": "Jul 2018 &mdash; 2020",
-    "proj15.org": "Ongoing development and support",
-
-    "proj16.date": "May 2017 &mdash; Jul 2023",
-    "proj16.role": "&mdash; Adobe Analytics tracking",
-    "proj16.org": "Multi-country Report Suite configuration and migration from DTM to Launch",
-
-    "proj17.date": "Jan 2014 &mdash; Jul 2014",
-    "proj17.role": "&mdash; Corporate site migration",
-    "proj17.org": "Migration from Joomla to a CQ5 environment",
-
     "profilo.kicker": "Profile",
     "profilo.title": "My professional profile",
     "profilo.lede": "Digital professional with over 20 years of experience in IT and digital marketing, now specialized in Adobe Experience Cloud.",
@@ -262,6 +196,7 @@
       toggle.addEventListener("click", function () {
         applyLanguage(currentLang() === "it" ? "en" : "it");
         renderArticles();
+        renderProjects();
       });
     }
   }
@@ -521,6 +456,57 @@
       });
   }
 
+  // Sezione "Progetti recenti": LinkedIn non offre un feed pubblico per i
+  // progetti di un profilo personale, quindi assets/projects.json va
+  // aggiornato a mano (ultimi 10, dal piu' recente) quando si aggiunge un
+  // progetto su https://www.linkedin.com/in/mcoro/details/projects/.
+  var MAX_PROJECTS = 10;
+  var projectsData = [];
+
+  function renderProjects() {
+    var track = document.getElementById("projCarousel");
+    if (!track || projectsData.length === 0) return;
+
+    var lang = currentLang();
+    track.innerHTML = projectsData
+      .slice(0, MAX_PROJECTS)
+      .map(function (proj) {
+        var date = lang === "en" ? proj.dateEn : proj.dateIt;
+        var role = lang === "en" ? proj.roleEn : proj.roleIt;
+        var org = lang === "en" ? proj.orgEn : proj.orgIt;
+        var roleHtml = proj.roleLink
+          ? '<a href="' + escapeHtml(proj.roleLink) + '" target="_blank" rel="noopener noreferrer">' +
+            escapeHtml(proj.roleLinkText) + "</a> " + escapeHtml(role)
+          : escapeHtml(role);
+
+        return (
+          '<article class="job-card">' +
+          '<span class="job-date">' + escapeHtml(date) + "</span>" +
+          '<h3 class="job-role">' + roleHtml + "</h3>" +
+          '<p class="job-org">' + escapeHtml(org) + "</p>" +
+          "</article>"
+        );
+      })
+      .join("");
+  }
+
+  function initProjects() {
+    if (!document.getElementById("projCarousel")) return;
+
+    fetch("assets/projects.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        projectsData = Array.isArray(data) ? data : [];
+        renderProjects();
+      })
+      .catch(function () {
+        /* file non disponibile: la sezione resta vuota invece di mostrare dati stantii */
+      });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initI18n();
     initHeaderScroll();
@@ -532,6 +518,7 @@
     initHeroPhoto();
     initContactForm();
     initArticles();
+    initProjects();
     initYear();
   });
 })();

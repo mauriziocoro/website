@@ -770,6 +770,95 @@ a { color: inherit; }
 }
 .footer-inner p { margin: 0; }
 
+.footer-cookie-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: .85rem;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.footer-cookie-link:hover,
+.footer-cookie-link:focus-visible { color: var(--accent); }
+
+/* ============ Cookie modal ============ */
+.cookie-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.cookie-modal[hidden] { display: none; }
+.cookie-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8,9,14,.7);
+}
+.cookie-modal-dialog {
+  position: relative;
+  max-width: 520px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+}
+.cookie-modal-dialog h2 {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+.cookie-modal-dialog p { color: var(--text-muted); line-height: 1.6; }
+.cookie-modal-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.cookie-modal-list li {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+.cookie-modal-list strong { color: var(--text); }
+.cookie-modal-list code {
+  font-size: .85em;
+  background: var(--accent-dim);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.cookie-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.cookie-modal-close svg { width: 16px; height: 16px; }
+.cookie-modal-close:hover,
+.cookie-modal-close:focus-visible { color: var(--text); border-color: var(--accent); }
+
 /* ============ Reveal on scroll ============ */
 .reveal {
   opacity: 0;

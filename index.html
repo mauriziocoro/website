@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' https://assets.adobedtm.com; connect-src 'self' https://maurizio.data.adobedc.net; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
 <title>Maurizio Coro — Senior Field Engineer Adobe | Adobe Experience Platform &amp; Analytics</title>
 <meta name="description" content="Maurizio Coro — Senior Field Engineer in Adobe Systems Italia, specializzato in Adobe Experience Platform, Analytics, Target, Customer Journey Analytics e Adobe Journey Optimizer. Arbitro di pallavolo FIPAV e autore (Zeno2k) su Nerdando.com.">
 <meta name="robots" content="index, follow">
@@ -22,6 +22,13 @@
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
+
+<!-- Adobe Experience Platform Web SDK / Analytics via Adobe Launch.
+     adobeDataLayer va inizializzato prima del caricamento della libreria,
+     cosi' eventuali push fatti da script.js prima che Launch sia pronto
+     restano in coda e vengono processati non appena carica. -->
+<script>window.adobeDataLayer = window.adobeDataLayer || [];</script>
+<script src="https://assets.adobedtm.com/b9f592aa8ba8/4d78f8b39c78/launch-027cdb20ee56-development.min.js" async></script>
 
 <script type="application/ld+json">
 {
@@ -613,9 +620,37 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>&copy; <span id="year"></span> Maurizio Coro</p>
-    <p class="muted" data-i18n="footer.tagline">Realizzato a mano, senza tracker né dipendenze esterne.</p>
+    <p class="muted" data-i18n="footer.tagline">Realizzato a mano, con attenzione alla privacy.</p>
+    <button type="button" class="footer-cookie-link" id="cookieInfoBtn" data-i18n="footer.cookieLink">Informazioni sui cookie</button>
   </div>
 </footer>
+
+<div class="cookie-modal" id="cookieModal" hidden>
+  <div class="cookie-modal-backdrop" data-cookie-modal-close></div>
+  <div class="cookie-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="cookieModalTitle">
+    <button type="button" class="cookie-modal-close" id="cookieModalClose" data-i18n-aria="footer.cookieModalCloseAria" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="cookieModalTitle" data-i18n="footer.cookieModalTitle">Cookie e misurazione del traffico</h2>
+    <p data-i18n="footer.cookieModalP1">
+      Questo sito utilizza Adobe Experience Platform (Adobe Analytics tramite Web SDK)
+      per misurare in forma anonima e aggregata il traffico: pagine e sezioni
+      visitate, link cliccati e lingua scelta. Non viene svolta profilazione
+      pubblicitaria né condivisione dei dati con terze parti a scopo di marketing.
+    </p>
+    <ul class="cookie-modal-list">
+      <li data-i18n="footer.cookieModalLi1">
+        <strong>Cookie di misurazione anonima</strong> — impostato dal dominio di
+        raccolta dati <code>maurizio.data.adobedc.net</code>, usato solo per
+        distinguere le sessioni di navigazione nei report aggregati.
+      </li>
+      <li data-i18n="footer.cookieModalLi2">
+        <strong>Nessun cookie di profilazione o remarketing</strong> — i dati non
+        vengono usati per pubblicità personalizzata né rivenduti a terzi.
+      </li>
+    </ul>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

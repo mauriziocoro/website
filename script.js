@@ -138,7 +138,13 @@
     "contatti.sede": "Location",
     "contatti.sedeValue": "Milan, Italy",
 
-    "footer.tagline": "Handcrafted, no trackers or external dependencies.",
+    "footer.tagline": "Handcrafted, with privacy in mind.",
+    "footer.cookieLink": "Cookie information",
+    "footer.cookieModalCloseAria": "Close",
+    "footer.cookieModalTitle": "Cookies and traffic measurement",
+    "footer.cookieModalP1": "This site uses Adobe Experience Platform (Adobe Analytics via Web SDK) to measure traffic anonymously and in aggregate: pages and sections visited, links clicked and chosen language. No advertising profiling is performed, and data is not shared with third parties for marketing purposes.",
+    "footer.cookieModalLi1": "<strong>Anonymous measurement cookie</strong> &mdash; set by the data collection domain <code>maurizio.data.adobedc.net</code>, used only to distinguish browsing sessions in aggregate reports.",
+    "footer.cookieModalLi2": "<strong>No profiling or remarketing cookies</strong> &mdash; the data is not used for personalized advertising nor resold to third parties.",
   };
 
   var I18N_CACHE_IT = Object.create(null);
@@ -507,6 +513,116 @@
       });
   }
 
+  // Tracciamento Adobe Analytics (Web SDK via Adobe Launch): ogni push su
+  // adobeDataLayer alimenta le regole "page views" e "link click" configurate
+  // in Tags. page.pageName/siteSection usano lo slug della sezione corrente.
+  var currentSectionId = "home";
+
+  function pushDataLayerEvent(eventName, payload) {
+    window.adobeDataLayer = window.adobeDataLayer || [];
+    var entry = { event: eventName };
+    for (var key in payload) {
+      if (Object.prototype.hasOwnProperty.call(payload, key)) entry[key] = payload[key];
+    }
+    window.adobeDataLayer.push(entry);
+  }
+
+  function getPageObject(sectionId) {
+    return {
+      language: currentLang(),
+      pageName: sectionId,
+      url: window.location.href,
+      siteSection: sectionId,
+      title: document.title,
+    };
+  }
+
+  function trackPageView(sectionId) {
+    pushDataLayerEvent("pageView", { page: getPageObject(sectionId) });
+  }
+
+  function initPageViewTracking() {
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main > section[id]"));
+    if (sections.length === 0) return;
+
+    // Pageview iniziale per la sezione visibile al caricamento (home).
+    trackPageView(currentSectionId);
+
+    if (!("IntersectionObserver" in window)) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var id = entry.target.id;
+          if (id === currentSectionId) return;
+          currentSectionId = id;
+          trackPageView(id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
+  function initLinkClickTracking() {
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest ? event.target.closest("a[href]") : null;
+      if (!link) return;
+
+      var rawHref = link.getAttribute("href") || "";
+      var name = (link.textContent || "").trim() || link.getAttribute("aria-label") || rawHref;
+      var type = "other";
+
+      if (link.hasAttribute("download")) {
+        type = "download";
+      } else if (!/^(mailto:|tel:|#)/i.test(rawHref)) {
+        try {
+          if (new URL(link.href, window.location.href).origin !== window.location.origin) {
+            type = "exit";
+          }
+        } catch (e) {
+          /* href non risolvibile in URL assoluto: resta "other" */
+        }
+      }
+
+      pushDataLayerEvent("linkClick", {
+        link: { name: name, section: currentSectionId, type: type },
+        page: { language: currentLang() },
+      });
+    });
+  }
+
+  function initCookieModal() {
+    var modal = document.getElementById("cookieModal");
+    var openBtn = document.getElementById("cookieInfoBtn");
+    var closeBtn = document.getElementById("cookieModalClose");
+    if (!modal || !openBtn || !closeBtn) return;
+
+    function onKeydown(event) {
+      if (event.key === "Escape") close();
+    }
+
+    function open() {
+      modal.hidden = false;
+      closeBtn.focus();
+      document.addEventListener("keydown", onKeydown);
+    }
+
+    function close() {
+      modal.hidden = true;
+      openBtn.focus();
+      document.removeEventListener("keydown", onKeydown);
+    }
+
+    openBtn.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    modal.querySelectorAll("[data-cookie-modal-close]").forEach(function (el) {
+      el.addEventListener("click", close);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initI18n();
     initHeaderScroll();
@@ -519,6 +635,9 @@
     initContactForm();
     initArticles();
     initProjects();
+    initCookieModal();
     initYear();
+    initPageViewTracking();
+    initLinkClickTracking();
   });
 })();

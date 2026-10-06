@@ -1,0 +1,33 @@
+name: Update Nerdando articles
+
+on:
+  schedule:
+    # Ogni giorno alle 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-articles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch latest Nerdando articles
+        run: node scripts/update-articles.mjs
+
+      - name: Commit changes if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/articles.json
+          git diff --cached --quiet || git commit -m "chore: aggiorna articoli Nerdando"
+          git push

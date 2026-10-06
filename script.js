@@ -190,10 +190,6 @@
     "articoli.kicker": "Zeno2k writes",
     "articoli.title": "Latest articles on Nerdando.com",
     "articoli.allBtn": "All articles",
-    "articoli.date1": "July 31, 2026",
-    "articoli.date2": "July 28, 2026",
-    "articoli.date3": "July 17, 2026",
-    "articoli.date4": "July 9, 2026",
 
     "contatti.title": "Let&rsquo;s talk",
     "contatti.lede": "For Adobe Experience Cloud projects, collaborations, or just to talk about volleyball and nerd culture &mdash; get in touch.",
@@ -262,6 +258,7 @@
     if (toggle) {
       toggle.addEventListener("click", function () {
         applyLanguage(currentLang() === "it" ? "en" : "it");
+        renderArticles();
       });
     }
   }
@@ -457,6 +454,70 @@
     if (el) el.textContent = String(new Date().getFullYear());
   }
 
+  // Sezione "Zeno2k scrive": gli articoli sono caricati da assets/articles.json,
+  // un file rigenerato periodicamente da scripts/update-articles.mjs a partire
+  // dal feed RSS di Nerdando.com, cos&igrave; non serve toccare l'HTML a mano
+  // a ogni nuovo articolo pubblicato.
+  var IT_MONTHS = [
+    "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno",
+    "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre",
+  ];
+  var EN_MONTHS = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+  var articlesData = [];
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function formatArticleDate(isoDate, lang) {
+    var date = new Date(isoDate);
+    if (lang === "en") {
+      return EN_MONTHS[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    }
+    var month = IT_MONTHS[date.getMonth()];
+    return date.getDate() + " " + month.charAt(0).toUpperCase() + month.slice(1) + " " + date.getFullYear();
+  }
+
+  function renderArticles() {
+    var grid = document.getElementById("articlesGrid");
+    if (!grid || articlesData.length === 0) return;
+
+    var lang = currentLang();
+    grid.innerHTML = articlesData
+      .map(function (article) {
+        return (
+          '<a class="article-card" href="' + escapeHtml(article.link) + '" target="_blank" rel="noopener noreferrer">' +
+          '<span class="article-tag">' + escapeHtml(article.tag) + "</span>" +
+          "<h3>" + escapeHtml(article.title) + "</h3>" +
+          '<span class="article-date">' + formatArticleDate(article.isoDate, lang) + "</span>" +
+          "</a>"
+        );
+      })
+      .join("");
+  }
+
+  function initArticles() {
+    if (!document.getElementById("articlesGrid")) return;
+
+    fetch("assets/articles.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        articlesData = Array.isArray(data) ? data : [];
+        renderArticles();
+      })
+      .catch(function () {
+        /* feed non disponibile: la sezione resta vuota invece di mostrare dati stantii */
+      });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initI18n();
     initHeaderScroll();
@@ -467,6 +528,7 @@
     initCarousels();
     initHeroPhoto();
     initContactForm();
+    initArticles();
     initYear();
   });
 })();

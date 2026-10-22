@@ -32,6 +32,7 @@ const CATEGORY_LABELS = {
   "Videogames": "Videogames",
   "Fumetti & Libri": "Comics & Books",
   "Film & Serie TV": "Film & TV",
+  "Giochi da tavolo": "Board Games",
 };
 
 const NAMED_ENTITIES = {

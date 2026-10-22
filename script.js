@@ -20,7 +20,7 @@
 
     "hero.eyebrow": "Milan, Italy",
     "hero.role": "Senior MarTech Architect @ Adobe &middot; Adobe Experience Platform Specialist",
-    "hero.lede": "Over 20 years across IT and digital marketing. Today I design and implement Adobe Experience Platform, Analytics, Target, Customer Journey Analytics and Adobe Journey Optimizer solutions for enterprise clients.",
+    "hero.lede": "Over 25 years across IT and digital marketing. Today I design and implement Adobe Experience Platform, Analytics, Target, Customer Journey Analytics and Adobe Journey Optimizer solutions for enterprise clients.",
     "hero.contattami": "Contact me",
     "hero.socialAria": "Social profiles",
 
@@ -40,7 +40,7 @@
     "servizi.card6.desc": "Web usability, accessibility, SEO and creative software for finely crafted digital experiences.",
 
     "esperienza.kicker": "Experience",
-    "esperienza.title": "20+ years of professional experience",
+    "esperienza.title": "25+ years of professional experience",
     "esperienza.prevAria": "Previous experience",
     "esperienza.nextAria": "Next experience",
 
@@ -81,7 +81,7 @@
 
     "profilo.kicker": "Profile",
     "profilo.title": "My professional profile",
-    "profilo.lede": "Digital professional with over 20 years of experience in IT and digital marketing, now specialized in Adobe Experience Cloud.",
+    "profilo.lede": "Digital professional with over 25 years of experience in IT and digital marketing, now specialized in Adobe Experience Cloud.",
     "profilo.tablistAria": "Profile sections",
     "profilo.tab.chiSono": "About me",
     "profilo.tab.competenze": "Skills",
